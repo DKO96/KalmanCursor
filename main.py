@@ -14,12 +14,12 @@ def main():
 
     mu = 0
     sigma = 50
-    trail = deque(maxlen=50)
+    noisy = deque(maxlen=50)
+    ground = deque(maxlen=50)
 
     pygame.init()
     screen = pygame.display.set_mode(window_size)
     screen.fill((0, 0, 0))
-    color = (255, 255, 255)
 
     start_time = time.monotonic()
     running = True
@@ -29,19 +29,21 @@ def main():
                 running = False
                 break
 
-        raw_x, raw_y = pygame.mouse.get_pos()
-        x = int(raw_x + random.gauss(mu, sigma))
-        y = int(raw_y + random.gauss(mu, sigma))
+        gx, gy = pygame.mouse.get_pos()
+        x = int(gx + random.gauss(mu, sigma))
+        y = int(gy + random.gauss(mu, sigma))
 
-        trail.append((x, y))
+        noisy.append((x, y))
+        ground.append((gx, gy))
 
-        fade_surf = pygame.Surface(window_size)
-        fade_surf.set_alpha(200)
-        fade_surf.fill((0, 0, 0))
-        screen.blit(fade_surf, (0, 0))
+        fade_trail = pygame.Surface(window_size)
+        fade_trail.set_alpha(200)
+        fade_trail.fill((0, 0, 0))
+        screen.blit(fade_trail, (0, 0))
 
-        if len(trail) > 1:
-            pygame.draw.lines(screen, color, False, list(trail), 3)
+        if len(noisy) > 1:
+            pygame.draw.lines(surface=screen, color=(255,255,0), closed=False, points=list(noisy), width=3)
+            pygame.draw.lines(surface=screen, color=(255,0,0), closed=False, points=list(ground), width=3)
 
         pygame.display.flip()
 
