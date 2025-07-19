@@ -48,7 +48,7 @@ def main():
 
         # Initialize filters
         if not initialized:
-            x_init = np.array([0, 0, 0, 0])
+            x_init = np.array([x, y, 0, 0])
             P_init = np.eye(4)
             state, cov = kf.kalman_filter(x_init, P_init, y_meas)
 
@@ -78,14 +78,12 @@ def main():
         screen.blit(fade_trail, (0, 0))
 
         if len(noisy) > 1:
-            pygame.draw.lines(surface=screen, color=(255,255,0), closed=False, points=list(noisy), width=3)
-            pygame.draw.lines(surface=screen, color=(255,0,0), closed=False, points=list(ground), width=3)
-            pygame.draw.lines(surface=screen, color=(0,0,255), closed=False, points=list(kalman), width=3)
-            pygame.draw.lines(surface=screen, color=(0,255,0), closed=False, points=list(lowpass), width=3)
+            pygame.draw.lines(surface=screen, color=(80,80,0), closed=False, points=list(noisy), width=3)
+            pygame.draw.lines(surface=screen, color=(25,0,0), closed=False, points=list(ground), width=3)
+            pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(kalman), width=3)
+            pygame.draw.lines(surface=screen, color=(0,80,0), closed=False, points=list(lowpass), width=3)
 
         pygame.display.flip()
-
-        # print(f"x: {x} | y: {y}")
 
         time.sleep(timestep - ((time.monotonic() - start_time) % timestep))
 

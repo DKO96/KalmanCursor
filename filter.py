@@ -2,16 +2,16 @@ import numpy as np
 
 class KalmanFilter:
     def __init__(self):
-        self.A = np.array([[1, 0, 1, 0],
-                           [0, 1, 0, 1],
+        self.A = np.array([[1, 0, 0.05, 0],
+                           [0, 1, 0, 0.05],
                            [0, 0, 1, 0],
                            [0, 0, 0, 1]
                            ])
         self.C = np.array([[1, 0, 0, 0],
                            [0, 1, 0, 0]
                            ])
-        self.Q = 1e-2 * np.eye(4)
-        self.R = 1e1 * np.eye(2)
+        self.Q = np.diag([0.8, 0.8, 0.5, 0.5])
+        self.R = 8 * np.eye(2)
     
     def kalman_filter(self, x_hat, P_hat, y_meas):
         x_check = self.A @ x_hat
