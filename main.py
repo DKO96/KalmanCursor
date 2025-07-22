@@ -79,9 +79,10 @@ def main():
 
         if len(noisy) > 1:
             pygame.draw.lines(surface=screen, color=(80,80,0), closed=False, points=list(noisy), width=3)
-            pygame.draw.lines(surface=screen, color=(25,0,0), closed=False, points=list(ground), width=3)
+            pygame.draw.lines(surface=screen, color=(75,0,0), closed=False, points=list(ground), width=3)
+            # pygame.draw.lines(surface=screen, color=(0,80,0), closed=False, points=list(lowpass), width=3)
             pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(kalman), width=3)
-            pygame.draw.lines(surface=screen, color=(0,80,0), closed=False, points=list(lowpass), width=3)
+            # pygame.draw.elliptical
 
         pygame.display.flip()
 

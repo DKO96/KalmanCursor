@@ -1,11 +1,11 @@
 import numpy as np
 
 class KalmanFilter:
-    def __init__(self):
-        self.A = np.array([[1, 0, 0.05, 0],
-                           [0, 1, 0, 0.05],
-                           [0, 0, 1, 0],
-                           [0, 0, 0, 1]
+    def __init__(self, dt):
+        self.A = np.array([[1, 0, dt,  0],
+                           [0, 1,  0, dt],
+                           [0, 0,  1,  0],
+                           [0, 0,  0,  1]
                            ])
         self.C = np.array([[1, 0, 0, 0],
                            [0, 1, 0, 0]
