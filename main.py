@@ -1,7 +1,6 @@
 from os import environ
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
-import time
 import random
 import numpy as np
 import pygame
@@ -12,9 +11,9 @@ from filter import KalmanFilter, LowPassFilter
 def main():
     x, y = None, None
     window_size = (2150, 2000)
-    timestep = 0.05
+    timestep = 0.01
 
-    kf = KalmanFilter()
+    kf = KalmanFilter(timestep)
     lp = LowPassFilter(alpha=0.25)
     initialized = False
 
@@ -29,9 +28,11 @@ def main():
     screen = pygame.display.set_mode(window_size)
     screen.fill((0, 0, 0))
 
-    start_time = time.monotonic()
     running = True
+    clock = pygame.time.Clock()
     while running:
+        dt_ms = clock.tick(1/timestep)
+
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 running = False
@@ -52,24 +53,27 @@ def main():
             P_init = np.eye(4)
             state, cov = kf.kalman_filter(x_init, P_init, y_meas)
 
-            x_prev = x
-            y_prev = y
+            kx, ky, vx, vy = state
+
+            x_prev = kx
+            y_prev = ky
             lx, ly = x_prev, y_prev
 
             initialized = True
         else:
             # Kalman Filter
             state, cov = kf.kalman_filter(state, cov, y_meas)
+            kx, ky, vx, vy = state
 
             # Low Pass Filter
             prev = [x_prev, y_prev]
-            curr = [x, y]
+            curr = [kx, ky]
             lx, ly = lp.low_pass_filter(prev, curr)
             x_prev = lx
             y_prev = ly
 
-        kx, ky, vx, vy = state
-        kalman.append((kx, ky))
+        # kx, ky, vx, vy = state
+        # kalman.append((kx, ky))
         lowpass.append((lx, ly))
 
         fade_trail = pygame.Surface(window_size)
@@ -79,14 +83,11 @@ def main():
 
         if len(noisy) > 1:
             pygame.draw.lines(surface=screen, color=(80,80,0), closed=False, points=list(noisy), width=3)
-            pygame.draw.lines(surface=screen, color=(75,0,0), closed=False, points=list(ground), width=3)
-            # pygame.draw.lines(surface=screen, color=(0,80,0), closed=False, points=list(lowpass), width=3)
-            pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(kalman), width=3)
-            # pygame.draw.elliptical
+            pygame.draw.lines(surface=screen, color=(150,0,0), closed=False, points=list(ground), width=3)
+            pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(lowpass), width=3)
+            # pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(kalman), width=3)
 
         pygame.display.flip()
-
-        time.sleep(timestep - ((time.monotonic() - start_time) % timestep))
 
     pygame.display.quit()
     pygame.quit()

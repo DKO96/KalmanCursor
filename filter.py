@@ -10,8 +10,12 @@ class KalmanFilter:
         self.C = np.array([[1, 0, 0, 0],
                            [0, 1, 0, 0]
                            ])
-        self.Q = np.diag([0.8, 0.8, 0.5, 0.5])
-        self.R = 8 * np.eye(2)
+
+        Qp = 0.05
+        Qv = 0.05
+        Rr = 1.5
+        self.Q = np.diag([Qp, Qp, Qv, Qv])
+        self.R = Rr * np.eye(2)
     
     def kalman_filter(self, x_hat, P_hat, y_meas):
         x_check = self.A @ x_hat
