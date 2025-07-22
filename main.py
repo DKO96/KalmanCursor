@@ -21,8 +21,7 @@ def main():
     sigma = 50
     noisy = deque(maxlen=50)
     ground = deque(maxlen=50)
-    kalman = deque(maxlen=50)
-    lowpass = deque(maxlen=50)
+    filter = deque(maxlen=50)
 
     pygame.init()
     screen = pygame.display.set_mode(window_size)
@@ -72,9 +71,7 @@ def main():
             x_prev = lx
             y_prev = ly
 
-        # kx, ky, vx, vy = state
-        # kalman.append((kx, ky))
-        lowpass.append((lx, ly))
+        filter.append((lx, ly))
 
         fade_trail = pygame.Surface(window_size)
         fade_trail.set_alpha(200)
@@ -84,8 +81,7 @@ def main():
         if len(noisy) > 1:
             pygame.draw.lines(surface=screen, color=(80,80,0), closed=False, points=list(noisy), width=3)
             pygame.draw.lines(surface=screen, color=(150,0,0), closed=False, points=list(ground), width=3)
-            pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(lowpass), width=3)
-            # pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(kalman), width=3)
+            pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(filter), width=3)
 
         pygame.display.flip()
 

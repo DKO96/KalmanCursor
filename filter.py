@@ -13,7 +13,7 @@ class KalmanFilter:
 
         Qp = 0.05
         Qv = 0.05
-        Rr = 1.5
+        Rr = 0.8
         self.Q = np.diag([Qp, Qp, Qv, Qv])
         self.R = Rr * np.eye(2)
     
