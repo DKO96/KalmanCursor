@@ -13,7 +13,7 @@ class KalmanFilter:
 
         Qp = 0.05
         Qv = 0.05
-        Rr = 0.8
+        Rr = 0.6
         self.Q = np.diag([Qp, Qp, Qv, Qv])
         self.R = Rr * np.eye(2)
     
@@ -29,7 +29,7 @@ class KalmanFilter:
         return x_hat, P_hat
 
 class LowPassFilter:
-    def __init__(self, alpha=0.3):
+    def __init__(self, alpha=0.9):
         self.alpha = alpha
     
     def low_pass_filter(self, prev, curr):

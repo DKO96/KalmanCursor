@@ -10,15 +10,15 @@ from filter import KalmanFilter, LowPassFilter
 
 def main():
     x, y = None, None
-    window_size = (2150, 2000)
+    window_size = (2500, 2200)
     timestep = 0.01
 
     kf = KalmanFilter(timestep)
-    lp = LowPassFilter(alpha=0.25)
+    lp = LowPassFilter(alpha=0.9)
     initialized = False
 
     mu = 0
-    sigma = 50
+    sigma = 40
     noisy = deque(maxlen=50)
     ground = deque(maxlen=50)
     filter = deque(maxlen=50)
@@ -79,9 +79,9 @@ def main():
         screen.blit(fade_trail, (0, 0))
 
         if len(noisy) > 1:
-            pygame.draw.lines(surface=screen, color=(80,80,0), closed=False, points=list(noisy), width=3)
-            pygame.draw.lines(surface=screen, color=(150,0,0), closed=False, points=list(ground), width=3)
-            pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(filter), width=3)
+            pygame.draw.lines(surface=screen, color=(160,160,0), closed=False, points=list(noisy), width=3)
+            pygame.draw.lines(surface=screen, color=(80,0,0), closed=False, points=list(ground), width=2)
+            pygame.draw.lines(surface=screen, color=(0,255,255), closed=False, points=list(filter), width=5)
 
         pygame.display.flip()
 
