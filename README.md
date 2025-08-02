@@ -1,1 +1,1 @@
-![Demo][media/output.gif]
+![Demo](media/output.gif)
