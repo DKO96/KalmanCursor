@@ -85,7 +85,7 @@ The measurement vector includes only the 2D position of the cursor which corresp
 \tag{6}
 ```
 
-Substituting $(1)$ and $(5)$ into $(2)$, we obtain the motion model:
+Substituting $\mathbf{x}_k$ and $A$ into the motion model:
 
 
 ```math
@@ -125,7 +125,7 @@ w_{\dot{y}, k} \\[6pt]
 \tag{7}
 ```
 
-and substituting $(1)$ and $(6)$ into $(3)$, we obtain the measurement model:
+and substituting $\mathbf{x}_k$ and $C$ into the measurement model:
 
 ```math
 \mathbf y_k = 
@@ -162,7 +162,7 @@ n_{y,k} \\[6pt]
 
 For the process and measurement noise covariance matrices, we assume that the noise in each state variable and each measurement is independent and Gaussian. Therefore, the process and measurement noise covariances are modeled as diagonal matrices:
 
-$$
+```math
 \mathbf{Q}_k = 
 \begin{bmatrix}
 \sigma_x^2 & 0 & 0 & 0 \\
@@ -171,16 +171,16 @@ $$
 0 & 0 & 0 & \sigma_{\dot{x}}^2
 \end{bmatrix} 
 \tag{9}
-$$
+```
 
-$$
+```math
 \mathbf{R}_k = 
 \begin{bmatrix}
 \sigma_{x,meas}^2 & 0  \\
 0 & \sigma_{y,meas}^2  \\
 \end{bmatrix} 
 \tag{10}
-$$
+```
 
 These values are manually chosen to balance trust between the motion model and the measurements. In practice, they are tuned to optimize tracking performance. Intuitively, larger values in $Q_k$ corresponds to higher uncertainty in the motion model (less trust in the motion model), and larger values in $R_k$ corresponds to higher uncertainty in the measurements (less trust in the measurements).
 
@@ -190,33 +190,33 @@ Given the linear system dynamics defined above, the Kalman filter provides an op
 
 ### **1. Prediction Step**
 
-$$
+```math
 \check{\mathbf{P}}_{k} = \mathbf{A}_{k-1} \hat{\mathbf{P}}_{k-1} \mathbf{A}_{k-1}^\top + \mathbf{Q}_k
 \tag{11.1}
-$$
+```
 
-$$
+```math
 \check{\mathbf{x}}_{k} = \mathbf{A}_{k-1} \hat{\mathbf{x}}_{k-1}
 \tag{11.2}
-$$
+```
 
 
 ### **2. Correction Step**
 
-$$
+```math
 \mathbf{K}_k = \check{\mathbf{P}}_{k} \mathbf{C}_k^\top (\mathbf{C} \check{\mathbf{P}}_k \mathbf{C}_k^\top + \mathbf{R}_k)^{-1}
 \tag{11.3}
-$$
+```
 
-$$
+```math
 \hat{\mathbf{P}}_{k} = (\mathbf{1} - \mathbf{K}_k \mathbf{C}_k) \check{\mathbf{P}}_{k}
 \tag{11.4}
-$$
+```
 
-$$
+```math
 \hat{\mathbf{x}}_{k} = \check{\mathbf{x}}_{k} + \mathbf{K}_k(\mathbf{y}_k - \mathbf{C} \check{\mathbf{x}}_{k})
 \tag{11.5}
-$$
+```
 
 Where
 - $\check{\mathbf{P}}_k$ represents the predicted covariance
