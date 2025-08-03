@@ -24,10 +24,10 @@ Where
 
 **Motion model:**
 
-$$
+```math
 \mathbf{x}_k = \mathbf{A} \mathbf{x}_{k-1} + \mathbf{w}_{k}, \quad \mathbf{w} \sim \mathcal{N}(0, \mathbf{Q}_{k})
 \tag{2}
-$$
+```
 
 **Measurement model:**
 
