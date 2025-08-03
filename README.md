@@ -177,12 +177,12 @@ For the process and measurement noise covariance matrices, we assume that the no
 \mathbf{R}_k = 
 \begin{bmatrix}
 \sigma_{x,meas}^2 & 0  \\
-0 & \sigma_{y,meas}^2  \\
+0 & \sigma_{y,meas}^2 
 \end{bmatrix} 
 \tag{10}
 ```
 
-These values are manually chosen to balance trust between the motion model and the measurements. In practice, they are tuned to optimize tracking performance. Intuitively, larger values in $Q_k$ corresponds to higher uncertainty in the motion model (less trust in the motion model), and larger values in $R_k$ corresponds to higher uncertainty in the measurements (less trust in the measurements).
+These values are manually chosen to balance trust between the motion model and the measurements. In practice, they are tuned to optimize tracking performance. Intuitively, larger values in $\mathbf{Q}_k$ corresponds to higher uncertainty in the motion model (less trust in the motion model), and larger values in $\mathbf{R}_k$ corresponds to higher uncertainty in the measurements (less trust in the measurements).
 
 
 ## Kalman Filter
