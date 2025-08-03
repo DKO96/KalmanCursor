@@ -7,9 +7,9 @@ This is a minimal Python demo that uses the Kalman filter to estimate the positi
 $$
 \mathbf x_k = 
 \begin{bmatrix}
-x_k \\[6pt]
-y_k \\[6pt]
-\dot x_k \\[6pt]
+x_k \\
+y_k \\
+\dot x_k \\
 \dot y_k 
 \end{bmatrix}
 \tag{1}
@@ -230,4 +230,4 @@ The correction step then incorporates a new measurement, $\mathbf{y}_k$, to upda
 
 Intuitively, Kalman gain balances trust between the model and the measurement. If the predicted uncertainty, $\check{\mathbf{P}}_k$, is large (i.e. the model is uncertain), the gain increases, and the filter places more weight on the measurement. On the other hand, if the measurement noise, $\mathbf{R}_k$, is large, the gain decreases, and the filter relies more on the model's prediction.
 
-In essence, the Kalman filter computes a weighted average of the predicted state and the new measurement, where the weighting is dynamically determined by the relative uncertainty in each. This makes an efficient and adaptive estimator that continously corrects itself in real time.
+In essence, the Kalman filter computes a weighted average of the predicted state and the new measurement, where the weighting is dynamically determined by the relative uncertainty in each. This makes an efficient and adaptive estimator that continuously corrects itself in real time.
