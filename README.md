@@ -85,7 +85,7 @@ The measurement vector includes only the 2D position of the cursor which corresp
 \tag{6}
 ```
 
-Substituting $\mathbf{x}_k$ and $A$ into the motion model:
+Substituting $\mathbf{x}_k$ and $\mathbf{A}$ into the motion model:
 
 
 ```math
@@ -125,7 +125,7 @@ w_{\dot{y}, k} \\[6pt]
 \tag{7}
 ```
 
-and substituting $\mathbf{x}_k$ and $C$ into the measurement model:
+and substituting $\mathbf{x}_k$ and $\mathbf{C}$ into the measurement model:
 
 ```math
 \mathbf y_k = 
