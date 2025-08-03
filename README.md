@@ -23,12 +23,14 @@ Where
 ## System Model
 
 **Motion model:**
+
 $$
 \mathbf{x}_k = \mathbf{A} \mathbf{x}_{k-1} + \mathbf{w}_{k}, \quad \mathbf{w} \sim \mathcal{N}(0, \mathbf{Q}_{k})
 \tag{2}
 $$
 
 **Measurement model:**
+
 $$
 \mathbf{y}_k = \mathbf{C} \mathbf{x}_{k} + \mathbf{n}_{k}, \quad \mathbf{n} \sim \mathcal{N}(0, \mathbf{R}_{k})
 \tag{3}
