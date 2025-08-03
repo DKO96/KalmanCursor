@@ -4,7 +4,7 @@
 
 This is a minimal Python demo that uses the Kalman filter to estimate the position of the mouse cursor. The system assumes constant velocity motion and Gaussian noise, making it a linear-Gaussian system. Under these assumptions, the Kalman filter provides the best linear unbiased estimate of the system state. For this demo, the recursive estimator will track the 4-dimensional state of the cursor:
 
-$$
+```math
 \mathbf x_k = 
 \begin{bmatrix}
 x_k \\
@@ -13,7 +13,7 @@ y_k \\
 \dot y_k 
 \end{bmatrix}
 \tag{1}
-$$
+```
 
 Where
 - $x$, $y$ represent the cursor's 2D position [pixels]
@@ -40,7 +40,7 @@ Here, $\mathbf{A}$ is the state transition matrix, $\mathbf{C}$ is the measureme
 
 ### State Transition and Measurement Matrices
 
-The system assumes the cursor moves with constant velocity in both axes. Using the state defined in $(1)$, at each timestep, the new position is computed from the previous position and velocity:
+The system assumes the cursor moves with constant velocity in both axes. Using the state defined above, at each timestep, the new position is computed from the previous position and velocity:
 
 ```math
 x_k = x_{k-1} + \dot{x}_{k-1} \Delta t \\
@@ -63,7 +63,7 @@ y_k = y_{k-1} + \dot{y}_{k-1} \Delta t \\
 
 Stacking these equations into vector form, we obtain the following state transition matrix:
 
-$$
+```math
 \mathbf{A} =
 \begin{bmatrix}
 1 & 0 & \Delta t & 0 \\
@@ -72,23 +72,23 @@ $$
 0 & 0 & 0 & 1
 \end{bmatrix}
 \tag{5}
-$$
+```
 
 The measurement vector includes only the 2D position of the cursor which corresponds to the first two elements of the state vector:
 
-$$
+```math
 \mathbf{C} =
 \begin{bmatrix}
 1 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0
 \end{bmatrix}
 \tag{6}
-$$
+```
 
 Substituting $(1)$ and $(5)$ into $(2)$, we obtain the motion model:
 
 
-$$
+```math
 \mathbf x_k = 
 \begin{bmatrix}
 x_k \\[6pt]
@@ -123,11 +123,11 @@ w_{\dot{y}, k} \\[6pt]
 \end{bmatrix}
 
 \tag{7}
-$$
+```
 
 and substituting $(1)$ and $(6)$ into $(3)$, we obtain the measurement model:
 
-$$
+```math
 \mathbf y_k = 
 \begin{bmatrix}
 x_{meas,k} \\[6pt]
@@ -156,7 +156,7 @@ n_{y,k} \\[6pt]
 \end{bmatrix}
 
 \tag{8}
-$$
+```
 
 ### Noise Covariances Matrices
 
