@@ -31,10 +31,10 @@ Where
 
 **Measurement model:**
 
-$$
+```math
 \mathbf{y}_k = \mathbf{C} \mathbf{x}_{k} + \mathbf{n}_{k}, \quad \mathbf{n} \sim \mathcal{N}(0, \mathbf{R}_{k})
 \tag{3}
-$$
+```
 
 Here, $\mathbf{A}$ is the state transition matrix, $\mathbf{C}$ is the measurement matrix, and $\mathbf{Q}_k$, $\mathbf{R}_k$ are the process and measurement noise covariances, respectively. Both noise terms are assumed to be zero-mean Gaussian. 
 
@@ -42,22 +42,24 @@ Here, $\mathbf{A}$ is the state transition matrix, $\mathbf{C}$ is the measureme
 
 The system assumes the cursor moves with constant velocity in both axes. Using the state defined in $(1)$, at each timestep, the new position is computed from the previous position and velocity:
 
-$$
+```math
 x_k = x_{k-1} + \dot{x}_{k-1} \Delta t \\
 \tag{4.1}
-$$
-$$
+```
+```math
 y_k = y_{k-1} + \dot{y}_{k-1} \Delta t \\
 \tag{4.2}
-$$
-$$
+```
+
+```math
 \dot{x}_k = \dot{x}_{k-1} \\
 \tag{4.3}
-$$
-$$
+```
+
+```math
 \dot{y}_k = \dot{y}_{k-1} \\
 \tag{4.4}
-$$
+```
 
 Stacking these equations into vector form, we obtain the following state transition matrix:
 
