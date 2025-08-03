@@ -168,7 +168,7 @@ For the process and measurement noise covariance matrices, we assume that the no
 \sigma_x^2 & 0 & 0 & 0 \\
 0 & \sigma_y^2 & 0 & 0 \\
 0 & 0 & \sigma_{\dot{x}}^2 & 0 \\
-0 & 0 & 0 & \sigma_{\dot{x}}^2
+0 & 0 & 0 & \sigma_{\dot{y}}^2
 \end{bmatrix} 
 \tag{9}
 ```
